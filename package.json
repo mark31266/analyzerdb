@@ -4,7 +4,7 @@
   "description": "Serialport Project",
   "author": "Mark Montenegro",
   "scripts": {
-    "start": "nodemon app.js"
+   
   },
   "dependencies": {
     "alertifyjs": "^1.13.1",
