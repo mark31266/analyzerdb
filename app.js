@@ -10,7 +10,7 @@ const port = new SerialPort('COM1', {
 }) 
 var admin = require("firebase-admin"); 
 const app = express()
-const port1 = 3000
+const port1 = process.env.PORT || 3000
 let server = http.createServer(app);
 var serviceAccount = require("./serviceAccountKey.json");
 admin.initializeApp({
