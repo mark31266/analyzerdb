@@ -480,8 +480,8 @@ let PLTL = data.match(/^PLT;.+/);
 io.emit('PLTL', PLTL)
 })
 
-server.listen(6969,function () {
-  console.log('Server Running in port 6969')
+server.listen(8080,function () {
+  console.log('Server Running in port 8080')
 
 });
 
