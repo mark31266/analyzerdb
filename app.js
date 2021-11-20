@@ -9,7 +9,8 @@ const port = new SerialPort('COM1', {
   baudRate: 9600
 }) 
 var admin = require("firebase-admin"); 
-var app = express();
+const app = express()
+const port1 = 3000
 let server = http.createServer(app);
 var serviceAccount = require("./serviceAccountKey.json");
 admin.initializeApp({
@@ -480,8 +481,12 @@ let PLTL = data.match(/^PLT;.+/);
 io.emit('PLTL', PLTL)
 })
 
-server.listen(8080,function () {
-  console.log('Server Running in port 8080')
+app.listen(port1, () => {
+  console.log(`listening at http://localhost:${port1}`)
+})
 
-});
+// server.listen(8080,function () {
+//   console.log('Server Running in port 8080')
+
+// });
 
