@@ -1,0 +1,153 @@
+const http = require('http')
+const matchAll = require("match-all");
+const fs = require('fs')
+const index = fs.readFileSync('index2.php')
+const results = fs.readFileSync('results.php')
+const settings = fs.readFileSync('settings.php')
+const home = fs.readFileSync('home.php')
+const login = fs.readFileSync('login.php')
+const dbb = fs.readFileSync('db.html')
+const runsamples = fs.readFileSync('runsamples.php')
+const Regex = require('@serialport/parser-regex')
+const SerialPort = require('serialport')
+const port = new SerialPort('COM1')
+var admin = require("firebase-admin");
+var serviceAccount = require("./analyzerdb-firebase-adminsdk-8av0j-7749b06ed5.json");
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://analyzerdb-default-rtdb.firebaseio.com"
+});
+const app = http.createServer(function (req, res) {
+  res.setHeader("Content-Type", "text/html");
+  switch (req.url) {
+      case "/index":
+        res.writeHead(200);
+          res.end(index);
+          break
+      case "/results":
+        res.writeHead(200);
+          res.end(results);
+          break
+          case "/home":
+        res.writeHead(200);
+          res.end(home);
+          break
+          case "/login":
+            res.writeHead(200);
+              res.end(login);
+              break
+              case "/settings":
+                res.writeHead(200);
+                  res.end(settings);
+                  break
+                  case "/run":
+                res.writeHead(200);
+                  res.end(runsamples);
+                  break
+                  case "/db":
+                    res.writeHead(200);
+                      res.end(dbb);
+                      break
+        
+      default:
+            res.writeHead(404);
+            res.end(JSON.stringify({error:"Resource not found"}));
+  }
+});
+const io = require("socket.io")(app, {
+    allowEIO3: true // false by default
+  });
+io.on('connection', function(socket) {
+  console.log('Node is listening to port')
+}) 
+const parser = port.pipe(new Regex({ regex: /[\r\n]+/ }))
+parser.on('data', function(data) {
+  console.log(' ' + data)
+  io.emit('data', data)
+  //Analyzer Model Data
+  let AMD = data.match(/^MYTHIC 1;/);
+  console.dir(' ' + AMD)
+  io.emit('AMD', AMD)
+    //SID Data
+    let SID = data.match(/^SID;.+/);
+    console.dir(' ' + SID)
+    io.emit('SID', SID)
+  //ID Data
+  let ID = data.match(/^ID;.+/);
+  console.dir(' ' + ID)
+  io.emit('ID', ID)
+   //PID Data
+   let PID = data.match(/^PID;.+/);
+   console.dir(' ' + PID)
+   io.emit('PID', PID)
+  //WBC Data
+  let WBC = data.match(/^WBC;.+ ;.+;/);
+  console.dir(' ' + WBC)
+  io.emit('WBC', WBC)
+  //LYM% Data
+    let LYM = data.match(/^LYM%;.....;/);
+    console.dir(' ' + LYM)
+    io.emit('LYM',LYM)
+     //MON% Data
+  let MON = data.match(/^MON%;.....;/);
+  console.dir(' ' + MON)
+  io.emit('MON', MON)
+  //GRA Data
+  let GRA = data.match(/^GRA;.+ ;.+;/);
+  console.dir(' ' + GRA)
+  io.emit('GRA', GRA)
+    //RBC Data
+  let RBC = data.match(/^RBC;.+ ;.+;/);
+  console.dir(' ' + RBC)
+  io.emit('RBC', RBC)
+ //HGB Data
+ let HGB = data.match(/^HGB;.+ ;.+;/);
+ console.dir(' ' + HGB)
+ io.emit('HGB', HGB)
+//HCT Data
+let HCT = data.match(/^HCT;.+;;.+;/);
+console.dir(' ' + HCT)
+io.emit('HCT', HCT)
+//MCV Data
+let MCV = data.match(/^MCV;.+ ;.+;/);
+console.dir(' ' + MCV)
+io.emit('MCV', MCV)
+//MCH Data
+let MCH = data.match(/^MCH;.+ ;.+;/);
+console.dir(' ' + MCH)
+io.emit('MCH', MCH)
+//MCHC Data
+let MCHC = data.match(/^MCHC;.+ ;.+;/);
+console.dir(' ' + MCHC)
+io.emit('MCHC', MCHC)
+//RDWC Data
+let RDWC = data.match(/^RDW;.+;;.+;/);
+console.dir(' ' + RDWC)
+io.emit('RDWC', RDWC)
+//RDWS Data
+let RDWS = data.match(/^RDW;.+;;.+;/);
+console.dir(' ' + RDWS)
+io.emit('RDWS', RDWS)
+//PLT Data
+let PLT = data.match(/^PLT;.+ ;.+;/);
+console.dir(' ' + PLT)
+io.emit('PLT', PLT)
+//MPV Data
+let MPV = data.match(/^MPV;.+;;.+;/);
+console.dir(' ' + MPV)
+io.emit('MPV', MPV)
+//PCT Data
+let PCT = data.match(/^PCT;.+;;.+;/);
+console.dir(' ' + PCT)
+io.emit('PCT', PCT)
+//PDW Data
+let PDW = data.match(/^PDW;.+;;.+;/);
+console.dir(' ' + PDW)
+io.emit('PDW', PDW)    
+//PLCR Data
+let PLCR = data.match(/^PDW;.+;;.+;/);
+console.dir(' ' + PLCR)
+io.emit('PLCR', PLCR)    
+})
+
+app.listen(6969) 

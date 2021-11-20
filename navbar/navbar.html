@@ -1,0 +1,51 @@
+<!-- Sidebar Holder -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h2><b>LabX</b></h2>
+        </div>
+
+        <ul class="list-unstyled components">
+            <p>Search Database</p>
+            <input type="text" id="mySearch" onkeyup="myFunction()" placeholder="Search..." title="Type in a category">
+            <p>Navigation</p>
+            <li>
+                <a href="/home">Main Dashboard</a>
+            </li>
+            <li class="active">
+                <a href="/run">Run Samples</a>
+            </li>
+            <li>
+                <a href="#">Manage Records</a>
+            </li>
+            <li>
+                <a href="/results">Results History</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div id="content">
+        <nav class="navbar navbar-expand-lg navbar-custom">
+            <div class="container-fluid">
+                <button type="button" id="sidebarCollapse" class="navbar-btn" style="background-color:transparent">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fas fa-align-justify"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:white">Operators's Name</a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Log Out</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link rounded-circle user-bg" href="#"><img src="https://firebasestorage.googleapis.com/v0/b/analyzerdb.appspot.com/o/sampleuser.png?alt=media&token=12ed836e-252b-43b3-9c2c-0c17211cba1c" alt="User" style="width:30px; height:30px"></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>

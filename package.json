@@ -1,0 +1,31 @@
+{
+  "name": "serialport3",
+  "version": "1.0.0",
+  "description": "Serialport Project",
+  "author": "Mark Montenegro",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "dependencies": {
+    "alertifyjs": "^1.13.1",
+    "bootstrap": "^4.6.0",
+    "bootstrap-vue": "^2.21.2",
+    "cookie-parser": "^1.4.5",
+    "csurf": "^1.11.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "firebase": "^8.4.2",
+    "firebase-admin": "^9.7.0",
+    "fomantic-ui": "^2.8.8",
+    "gulp": "^4.0.2",
+    "jquery": "^3.6.0",
+    "mdbootstrap": "^4.4.4",
+    "node-dir": "^0.1.17",
+    "node-proc": "0.0.1",
+    "nodemon": "^2.0.7",
+    "robotjs": "^0.6.0",
+    "semantic-ui-css": "^2.4.1",
+    "serialport": "^9.0.7",
+    "socket.io": "^4.0.1"
+  }
+}
